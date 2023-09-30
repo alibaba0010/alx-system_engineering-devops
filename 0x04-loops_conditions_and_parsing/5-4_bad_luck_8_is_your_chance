@@ -1,0 +1,16 @@
+#!/bin/bash
+# This script prints a "Best School" 10 times using while loop
+#+ Print "Bad Luck" at the 4th iteration and "Good Luck" at the 8th iteration
+
+count=0
+
+while [ $count -lt 10 ]; do
+    if [ $count -eq 3 ]; then
+        echo "bad Luck"
+    elif [ $count -eq 7 ]; then
+         echo "good Luck"
+    else
+        echo "Best School"
+    fi
+    ((count++))
+done
