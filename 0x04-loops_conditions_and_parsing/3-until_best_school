@@ -1,0 +1,9 @@
+#!/bin/bash
+# This script prints a string  "Best School" 10 times using until
+
+count=0
+
+until [ $count -ge 10 ]; do
+    echo "Best School"
+    ((count++))
+done
