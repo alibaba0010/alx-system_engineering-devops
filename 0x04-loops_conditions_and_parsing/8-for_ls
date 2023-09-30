@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script terate through files in the current directory using for loop
 #+ Display files in list
 

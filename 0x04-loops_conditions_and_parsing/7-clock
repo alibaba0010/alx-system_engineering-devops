@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script prints Clock in hour and minutes using nested while loop
 
 hour=0
