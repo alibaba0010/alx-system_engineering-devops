@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script prints a "Best School" 10 times using while loop
 #+ Print Hi at the 9th line
 
