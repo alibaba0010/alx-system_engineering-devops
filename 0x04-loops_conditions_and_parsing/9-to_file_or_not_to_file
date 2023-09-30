@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Information about a school file
 # Check if the file exists
 if [ -e "school" ]; then
