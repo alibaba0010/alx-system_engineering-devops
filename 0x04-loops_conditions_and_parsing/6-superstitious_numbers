@@ -1,0 +1,22 @@
+#!/bin/bash
+# This script prints a "Best School" 10 times using while loop
+#+ Print "Bad Luck" at the 4th iteration and "Good Luck" at the 8th iteration
+
+count=1
+
+while [ $count -le 20 ]; do
+    echo $count;
+    case $count in
+        4)
+            echo "Bad luck from China"
+            ;;
+        9)
+            echo "Bad luck from Japan"
+            ;;
+        17)
+            echo "Bad luck from Italy"
+            ;;
+        *)
+    esac
+    ((count++))
+done
