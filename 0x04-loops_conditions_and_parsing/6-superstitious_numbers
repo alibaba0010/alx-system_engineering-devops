@@ -8,13 +8,13 @@ while [ $count -le 20 ]; do
     echo $count;
     case $count in
         4)
-            echo "Bad luck from China"
+            echo "bad luck from China"
             ;;
         9)
-            echo "Bad luck from Japan"
+            echo "bad luck from Japan"
             ;;
         17)
-            echo "Bad luck from Italy"
+            echo "bad luck from Italy"
             ;;
         *)
     esac
