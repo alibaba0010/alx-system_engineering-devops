@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script prints a "Best School" 10 times using while loop
 #+ Print "Bad Luck" at the 4th iteration and "Good Luck" at the 8th iteration
 
