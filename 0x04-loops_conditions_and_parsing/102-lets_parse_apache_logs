@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Path to the Apache log file
+#+ Extract visitor IP addresses and HTTP status codes
+
+LOG_FILE="apache-access.log"
+
+awk '{print $1, $9}' "$LOG_FILE"
