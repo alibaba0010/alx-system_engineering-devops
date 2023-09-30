@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script prints a string  "Best School" 10 times using until
 
 count=0
