@@ -1,0 +1,14 @@
+#!/bin/bash
+# This script prints a "Best School" 10 times using while loop
+#+ Print Hi at the 9th line
+
+count=0
+
+while [ $count -lt 11 ]; do
+    if [ $count -eq 9 ]; then
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+    ((count++))
+done
