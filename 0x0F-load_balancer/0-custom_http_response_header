@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# Configure an Nginx server to have a custom 404 page. 
+#Doubles the number of webservers and adds new configs
 
-apt-get update
-apt-get install -y nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i "/server_name _;/ a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
-sed -i "/server_name _;/ a\\\terror_page 404 /404.html;" /etc/nginx/sites-available/default
-sed -i "/server_name _;/ a\\\tadd_header X-Served-By \$hostname always;" /etc/nginx/sites-available/default
-service nginx restart
+# Installing nginx
+sudo apt-get  update ; sudo apt-get -y install nginx
+
+string="http {\n\tadd_header X-Served-By \"$HOSTNAME\";"
+sudo sed -i "s/http {/$string/" /etc/nginx/nginx.conf
+# restart nginx
+sudo service nginx restart
