@@ -7,6 +7,7 @@ global
         user haproxy
         group haproxy
         daemon
+        h1-case-adjust x-served-by X-Served-By
 
         # Default SSL material locations
         ca-base /etc/ssl/certs
@@ -33,19 +34,26 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  ollyjhay-frontend
-        bind *:80
-        mode http
-        bind *:443 ssl crt /etc/haproxy/certs/www.ollyjhay.tech.pem
-        redirect scheme https if !{ ssl_fc }
-        default_backend ollyjhay-backend
-backend ollyjhay-backend
-        balance roundrobin
-        server 93511-web-01 35.174.209.1:80 check
-        server 93511-web-02 35.153.52.94:80 check
+frontend haproxy_balancer
+    bind *:80
+    http-request set-header X-Forwarded-For %[src]
+    http-request set-header X-Forwarded-Proto https if { ssl_fc }
+    default_backend http-backend
+    redirect scheme https code 301 if !{ ssl_fc }
 
-listen http-in
-        bind :80
-        balance roundrobin
-        server 93511-web-01 35.174.209.1:80 check
-        server 93511-web-02 35.153.52.94:80 check
+frontend https
+        bind *:443 ssl crt /etc/letsencrypt/live/www.aybims.tech.pem
+        http-request set-header X-Forwarded-For %[src]
+        http-request set-header X-Forwarded-Proto https if { ssl_fc }
+        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+        use_backend letsencrypt-backend if letsencrypt-acl
+        default_backend http-backend
+
+backend http-backend
+    balance roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server 7425-web-01 44.200.187.63:80 check
+    server 7425-web-02 44.192.44.120:80 check
+
+backend letsencrypt-backend
+        server letsencrypt 127.0.0.1:54321
