@@ -6,12 +6,11 @@ import requests
 from sys import argv
 
 if __name__ == '__main__':
-    url = "https://jsonplaceholder.typicode.com/users/{}"
+    url = "https://jsonplaceholder.typicode.com/"
     userId = argv[1]
-    user = requests.get(url.
-                        format(userId), verify=False).json()
+    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
     todos = requests.get(url + "todoss?userId={}".
-                        format(userId), verify=False).json()
+                         format(userId), verify=False).json()
     completed_tasks = []
     for task in todos:
         if task.get('completed') is True:
