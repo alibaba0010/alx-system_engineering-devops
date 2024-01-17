@@ -10,6 +10,8 @@ def number_of_subscribers(subreddit):
         return number of subscribers for a given subreddit
         return 0 if invalid subreddit given
     """
+    if subreddit is None or not isinstance(subreddit, str):
+        return 0
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     # get user agent
