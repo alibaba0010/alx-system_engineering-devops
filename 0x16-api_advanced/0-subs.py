@@ -1,27 +1,27 @@
 #!/usr/bin/python3
 """
-Query Reddit API for number of subscribers for a given subreddit
+Function that queries the Reddit API and returns
+the number of subscribers for a given subreddit.
 """
 import requests
+import sys
 
 
 def number_of_subscribers(subreddit):
-    """
-        return number of subscribers for a given subreddit
-        return 0 if invalid subreddit given
-    """
-    if subreddit is None or not isinstance(subreddit, str):
-        return 0
+    """ Queries to Reddit API """
+    u_agent = 'Mozilla/5.0'
+
+    headers = {
+        'User-Agent': u_agent
+    }
+
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-
-    # get user agent
-    # https://stackoverflow.com/questions/10606133/ -->
-    # sending-user-agent-using-requests-library-in-python
-    headers = requests.utils.default_headers()
-    headers.update({'User-Agent': 'My User Agent 1.0'})
-
-    r = requests.get(url, headers=headers).json()
-    subscribers = r.get('data', {}).get('subscribers')
-    if not subscribers:
+    res = requests.get(url, headers=headers, allow_redirects=False)
+    if res.status_code != 200:
         return 0
-    return subscribers
+    dic = res.json()
+    if 'data' not in dic:
+        return 0
+    if 'subscribers' not in dic.get('data'):
+        return 0
+    return res.json()['data']['subscribers']
